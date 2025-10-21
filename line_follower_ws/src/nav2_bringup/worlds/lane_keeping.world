@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <world name="circular_flat_black_track_world">
+
+    <!-- Light -->
+    <light name="sun" type="directional">
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>1</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Flat black circular track -->
+    <model name="flat_black_track">
+      <static>1</static>
+      <link name="link">
+        <visual name="black_ring_visual">
+          <pose>0 0 0.001 0 0 0</pose> <!-- very small height above ground -->
+          <geometry>
+            <cylinder>
+              <radius>3.0</radius>     <!-- Outer radius -->
+              <length>0.001</length>   <!-- Flat on ground -->
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+          </material>
+        </visual>
+
+        <!-- Inner cylinder to hollow out -->
+        <visual name="inner_ring_visual">
+          <pose>0 0 0.002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>2.8</radius>     <!-- Inner radius -->
+              <length>0.002</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
+
