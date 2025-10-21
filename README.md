@@ -94,11 +94,13 @@ If the line is not detected, the robot spins slowly to search for it.
 ### File Structure
 ```bash
 ros2-gazebo-linefollower-opencv/
-├── line_follower_pid/
-│   ├── line_follower_pid.py     # Main node implementing PID line following
-│   ├── package.xml              # ROS2 package metadata
-│   └── setup.py                 # Python package setup
+├── line_follower_ws/
+│   ├── line_follower_node.py     # Main node implementing PID line following
+│   ├──  src       
+│      └── nav2_bringup
+|      └── nav2_simple_commander              
 ├── README.md
+├── LICENSE
 ```
 ---
 ### Demonstration
