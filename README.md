@@ -1,4 +1,5 @@
 # Line Following Robot Simulation in ROS2 and Gazebo using OpenCV
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 This project implements a **line-following robot** in ROS2 using a PID controller and OpenCV for computer vision. The robot can detect a line in a simulated environment (Gazebo or real camera feed) and follow it autonomously.
 
@@ -99,11 +100,14 @@ ros2-gazebo-linefollower-opencv/
 │   └── setup.py                 # Python package setup
 ├── README.md
 ```
+---
+### Demonstration
 
+---
 
-
-License
+### License
 This project is licensed under the MIT License.
+---
+### Author
+NIVED KRISHNAN
 
-Author
-Your Name – Autonomous Mobile Robotics Developer
