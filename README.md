@@ -97,8 +97,8 @@ ros2-gazebo-linefollower-opencv/
 ├── line_follower_ws/
 │   ├── line_follower_node.py     # Main node implementing PID line following
 │   ├──  src       
-│      └── nav2_bringup
-|      └── nav2_simple_commander              
+      └── nav2_bringup
+      └── nav2_simple_commander              
 ├── README.md
 ├── LICENSE
 ```
