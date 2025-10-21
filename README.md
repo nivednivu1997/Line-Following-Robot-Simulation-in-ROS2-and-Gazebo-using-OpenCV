@@ -9,14 +9,14 @@ This project implements a **line-following robot** in ROS2 using a PID controlle
 - Uses **OpenCV** to process camera images and detect the line.
 - Implements a **PID controller** for smooth line following.
 - Automatically **searches for the line** if it is lost.
-- Compatible with **ROS2 (Foxy/Humble/Rolling)**.
+- Compatible with **ROS2 (Humble)**.
 - Can be used with simulated robots in **Gazebo** or a real robot with a camera.
 
 ---
 
 ## Dependencies
 
-- ROS2 (tested on Foxy/Humble)
+- ROS2 (tested on Humble)
 - OpenCV (`cv2`)
 - `cv_bridge`
 - Python 3
@@ -28,78 +28,79 @@ Install dependencies (example for ROS2 Humble):
 sudo apt update
 sudo apt install ros-humble-cv-bridge ros-humble-sensor-msgs ros-humble-geometry-msgs python3-opencv python3-numpy
 ```
+---
+
 ### Usage
 
-## Clone the repository:
+## 1) Clone the repository:
 
 ```bash
 git clone https://github.com/yourusername/ros2-gazebo-linefollower-opencv.git
 cd ros2-gazebo-linefollower-opencv
 ```
-## Build the package:
+## 2) Build the package:
 ```bash
 cd line_follower_ws &&
 colcon build &&
 source install/setup.bash
 ```
-## Run the Line Follower Gazebo Environment:
+## 3) Run the Line Follower Gazebo Environment:
 ```bash
 ros2 launch nav2_simple_commander route_example_launch.py x_pose:=1.2 y_pose:=0.5 yaw:=1.57
 ```
-## Run Line Follower Python Node
+## 4) Run Line Follower Python Node
 ```bash
 cd line_follower_ws && python3 line_follower_node.py 
 
 ```
+
+---
+
 ### How it Works
-Camera Feed Processing
-Captures the image from the robot's camera.
+## Camera Feed Processing
+- Captures the image from the robot's camera.
 
-Crops the lower 40% of the image to focus on the line.
+- Crops the lower 40% of the image to focus on the line.
 
-Converts the image to grayscale and applies binary thresholding.
+- Converts the image to grayscale and applies binary thresholding.
 
-Cleans the image using morphological operations (erosion and dilation).
+- Cleans the image using morphological operations (erosion and dilation).
 
-Line Detection
-Computes the centroid of the line using OpenCV image moments.
+## Line Detection
+- Computes the centroid of the line using OpenCV image moments.
 
-Calculates the error between the desired center (slightly shifted 5% to the right) and the detected line.
+- Calculates the error between the desired center (slightly shifted 5% to the right) and the detected line.
 
-PID Control
-Calculates control using Proportional (P), Integral (I), and Derivative (D) terms.
+## PID Control
+- Calculates control using Proportional (P), Integral (I), and Derivative (D) terms.
 
-Outputs the angular velocity to steer the robot.
+- Outputs the angular velocity to steer the robot.
 
-Maintains a constant forward speed while adjusting the steering.
+- Maintains a constant forward speed while adjusting the steering.
 
-Fallback
+## Fallback
 If the line is not detected, the robot spins slowly to search for it.
 
-Parameters to Tune
-kp, ki, kd → PID gains for tuning the steering response.
+### Parameters to Tune
+- kp, ki, kd → PID gains for tuning the steering response.
 
-linear_speed → Forward speed of the robot.
+- linear_speed → Forward speed of the robot.
 
-desired_center → Horizontal position of the line the robot should follow (0.5 = center, 0.55 = 5% offset to right).
+- desired_center → Horizontal position of the line the robot should follow (0.5 = center, 0.55 = 5% offset to right).
 
-crop_top → Portion of image to focus on (default 0.6 → bottom 40%).
+- crop_top → Portion of image to focus on (default 0.6 → bottom 40%).
 
 ### File Structure
-bash
-Copy code
+```bash
 ros2-gazebo-linefollower-opencv/
 ├── line_follower_pid/
 │   ├── line_follower_pid.py     # Main node implementing PID line following
 │   ├── package.xml              # ROS2 package metadata
 │   └── setup.py                 # Python package setup
 ├── README.md
-Notes
-Make sure your camera topic matches /intel_realsense_r200_depth/image_raw or update it in line_follower_pid.py.
+```
 
-Adjust PID gains for your robot and environment to get smoother line following.
 
-Works for both simulation (Gazebo) and real robots with compatible cameras.
 
 License
 This project is licensed under the MIT License.
